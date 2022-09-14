@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: backend-aspnet-deployment
+  name: backend-aspnet-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-aspnet-pod
+  template:
+    metadata:
+      labels:
+        app: backend-aspnet-pod
+      annotations:
+        name: backend-aspnet-pod
+    spec:
+      containers:
+      - name: backend-aspnet-container
+        image: developerjaycdave/backend-aspnet
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+          hostPort: 80
+          name: "http"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: backend-aspnet-deployment
+  name: backend-aspnet-deployment
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    name: "http"
+  selector:
+    run: backend-aspnet-pod
+  type: LoadBalancer
