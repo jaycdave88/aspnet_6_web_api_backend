@@ -1,8 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS base
 WORKDIR /app
 EXPOSE 80
+#Used to map the p
 ENV ASPNETCORE_URLS="http://*:80"
-ENV ASPNETCORE_ENVIRONMENT="Development"
+#Used to render Swagger UI
+ENV ASPNETCORE_ENVIRONMENT="Development" 
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
