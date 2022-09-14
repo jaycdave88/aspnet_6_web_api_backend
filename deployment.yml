@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: backend-aspnet-container
-        image: developerjaycdave/backend-aspnet:first
+        image: developerjaycdave/backend-aspnet:second
         resources:
           limits:
             memory: "128Mi"
